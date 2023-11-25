@@ -9,6 +9,9 @@ import AuthProvider from './Providers/AuthProvider.jsx';
 import Home from './Pages/Home/Home.jsx';
 import LayoutMain from './Layout/LayoutMain.jsx';
 import Login from './Pages/Login/Login.jsx';
+import Register from './Pages/Register/Register.jsx';
+import Error from './Pages/Error/Error.jsx';
+import Dashboard from './Pages/Dashboard/Dashboard.jsx';
 
 
 const router = createBrowserRouter([
@@ -23,8 +26,22 @@ const router = createBrowserRouter([
       {
         path:"/login",
         element: <Login/>
+      },
+      {
+        path: "/register",
+        element: <Register/>
+      },
+      {
+        path:"/dashboard",
+        element:<Dashboard/>,
+        children: [
+          {
+            
+          }
+        ]
       }
-    ]
+    ],
+    errorElement:<Error/>
   },
 ]);
 
