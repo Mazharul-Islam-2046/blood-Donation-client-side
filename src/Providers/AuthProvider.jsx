@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { createContext } from "react";
 import { useState } from "react";
 import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 export const AuthContext = createContext(null);
 
@@ -24,6 +26,26 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [axiosPublic] = useAxiosPublic()
+
+
+  const { data: upazilas = [] } = useQuery({
+    queryKey: ['upazilas'],
+    queryFn: async () => {
+        const res = await axiosPublic.get('/upazilas');
+        return res.data;
+    }
+})
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     fetch("https://cam-r-server.vercel.app/products")
@@ -32,6 +54,35 @@ const AuthProvider = ({ children }) => {
         setProducts(data);
       });
   }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+  // District fetch
+
+
+
+  const { data: districts = [] } = useQuery({
+    queryKey: ['districts'],
+    queryFn: async () => {
+        const res = await axiosPublic.get('/districts');
+        return res.data;
+    }
+})
+
+
+
+
+
+
 
   // Navbar profile image
   const [photo, setPhoto] = useState(null);
@@ -97,6 +148,8 @@ const AuthProvider = ({ children }) => {
     setPhoto,
     photo,
     products,
+    districts,
+    upazilas
   };
 
   return (
