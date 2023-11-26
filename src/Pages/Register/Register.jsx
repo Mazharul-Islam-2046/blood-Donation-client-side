@@ -25,7 +25,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, districts } = useContext(AuthContext);
+  const { createUser, districts, upazilas } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -40,6 +40,7 @@ const Register = () => {
   };
 
   const handleRegister = (data) => {
+    console.log(data);
     const email = data.email;
     const password = data.password;
     const name = data.name;
@@ -60,6 +61,8 @@ const Register = () => {
       navigate(from, { replace: true });
     });
   };
+
+
 
   return (
     <div className="flex justify-center items-center h-auto min-h-screen">
@@ -250,9 +253,72 @@ const Register = () => {
                 ))}
               </Select>
             </FormControl>
+
+            {/* District Select----------------------------------------------------- */}
+            <FormControl
+              variant="standard"
+              sx={{ m: 1, minWidth: "40ch", mb: 4, py: 1 }}
+            >
+              <InputLabel id="demo-simple-select-standard-label">
+                Upazila
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                {...register("upazila", {
+                  required: true,
+                })}
+                label="Upazila"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                {upazilas?.map((upazila, idx) => (
+                  <MenuItem key={idx} value={upazila?.name}>
+                    {upazila?.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {/* Age----------------------------------------------- */}
+            <FormControl
+              sx={{ m: 1, width: "40ch", mb: 4, py: 1 }}
+              variant="standard"
+            >
+              <InputLabel htmlFor="Age">Age</InputLabel>
+              <Input
+                {...register("age", {
+                  required: true,
+                })}
+                type="number"
+                endAdornment={<InputAdornment position="end"></InputAdornment>}
+              />
+              {errors.email?.type === "required" && (
+                <p className="text-red-600">Age is required</p>
+              )}
+            </FormControl>
           </div>
 
-          <div></div>
+          <div className="col-span-2 flex justify-center">
+            {/* Upload Image */}
+            <FormControl
+              sx={{ m: 1, width: "75%", mb: 1, mt: 4, py: 1 }}
+              variant="standard"
+            >
+              <InputLabel>Profile Picture</InputLabel>
+              <Input
+                {...register("Image", {
+                  required: true,
+                })}
+                type="file"
+                endAdornment={<InputAdornment position="end"></InputAdornment>}
+              />
+              
+              {errors.email?.type === "required" && (
+                <p className="text-red-600">Name is required</p>
+              )}
+            </FormControl>
+          </div>
 
           <div className="col-span-2 flex justify-center">
             <FormControl sx={{ m: 1, width: "75%", mb: 4 }} variant="standard">
