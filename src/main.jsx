@@ -10,6 +10,7 @@ import Register from "./Pages/Register/Register.jsx";
 import Error from "./Pages/Error/Error.jsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AddDonation from "./Pages/Dashboard/userPages/AddDonation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
-        children: [{}],
+        children: [
+          {
+            path: "/dashboard/addDonationRequest",
+            element: <AddDonation/>
+          }
+        ],
       },
     ],
     errorElement: <Error />,

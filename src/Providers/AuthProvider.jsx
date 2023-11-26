@@ -42,13 +42,8 @@ const AuthProvider = ({ children }) => {
 
 
 
-
-
-
-
-
   useEffect(() => {
-    fetch("https://cam-r-server.vercel.app/products")
+    fetch("http://localhost:5000")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -90,6 +85,14 @@ const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
+  useEffect(()=>{
+    fetch (`http://localhost:5000/users/${user?.email}`)
+    .then(res=> res.json())
+    .then((data) => {
+      setUserData(data)
+    })
+  },[user])
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -138,6 +141,31 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+
+
+  
+
+
+// const { data: userData = [] } = useQuery({
+//   queryKey: ['userData'],
+//   queryFn: async () => {
+//       const res = await axiosPublic.get(`/users/${user.email}`);
+//       return res.data;
+//   }
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
   const authInfo = {
     user,
     loading,
@@ -149,7 +177,8 @@ const AuthProvider = ({ children }) => {
     photo,
     products,
     districts,
-    upazilas
+    upazilas,
+    userData
   };
 
   return (

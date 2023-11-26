@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useState } from "react";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,13 +24,17 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+
+  const [axiosPublic] = useAxiosPublic();
 
   const { createUser, districts, upazilas } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
+  const imageKey = import.meta.env.VITE_IMG_BB_API_KEY;
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -41,28 +46,62 @@ const Register = () => {
 
   const handleRegister = (data) => {
     console.log(data);
-    const email = data.email;
     const password = data.password;
-    const name = data.name;
-    const bloodGroup = data.bloodGroup;
-    console.log(email, name, bloodGroup);
-    createUser(email, password).then((result) => {
-      const user = result.user;
-      console.log(user);
-      Swal.fire({
-        title: "User Register Successful.",
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
+    // const name = data.name;
+    // const bloodGroup = data.bloodGroup;
+    // const district = data.district;
+    // const upazila = data.upazila;
+    // const age = data.age;
+    // const image = data.image
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${imageKey}`;
+    // console.log(email, name, bloodGroup, image[0], age, upazila, district);
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+
+    fetch(img_hosting_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        if (imgResponse.success) {
+          const imgURL = imgResponse.data.display_url;
+          const { email, name, bloodGroup, district, upazila, age } = data;
+          createUser(email, password)
+            .then((result) => {
+              if (result) {
+                const newUser = {
+                  name,
+                  email,
+                  age,
+                  bloodGroup,
+                  district,
+                  upazila,
+                  image: imgURL,
+                };
+                axiosPublic.post("/users", newUser).then((data) => {
+                  console.log("after posting new user", data.data);
+                  if (data.data.insertedId) {
+                    reset();
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Registredted Successfully",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    
+                    navigate(from, { replace: true });
+                  }
+                });
+              }
+            })
+            .catch((error) => console.log(error));
+        }
       });
-      navigate(from, { replace: true });
-    });
+
+    //
   };
-
-
 
   return (
     <div className="flex justify-center items-center h-auto min-h-screen">
@@ -305,15 +344,15 @@ const Register = () => {
               sx={{ m: 1, width: "75%", mb: 1, mt: 4, py: 1 }}
               variant="standard"
             >
-              <InputLabel>Profile Picture</InputLabel>
+              <InputLabel shrink>Profile Picture</InputLabel>
               <Input
-                {...register("Image", {
+                {...register("image", {
                   required: true,
                 })}
                 type="file"
                 endAdornment={<InputAdornment position="end"></InputAdornment>}
               />
-              
+
               {errors.email?.type === "required" && (
                 <p className="text-red-600">Name is required</p>
               )}
