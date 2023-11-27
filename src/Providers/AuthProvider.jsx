@@ -27,6 +27,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [axiosPublic] = useAxiosPublic()
+  const [dashboardMenus, setDashboardMenu] = useState([]);
 
 
   const { data: upazilas = [] } = useQuery({
@@ -79,20 +80,34 @@ const AuthProvider = ({ children }) => {
 
 
 
+
+
+
   // Navbar profile image
   const [photo, setPhoto] = useState(null);
-  // const [uid, setUid] = useState('')
+
+
+  
+
+
+
+
+
+
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
-  useEffect(()=>{
-    fetch (`http://localhost:5000/users/${user?.email}`)
-    .then(res=> res.json())
-    .then((data) => {
-      setUserData(data)
-    })
-  },[user])
+  
+
+
+
+
+
+
+
+
+
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -143,6 +158,45 @@ const AuthProvider = ({ children }) => {
 
 
 
+
+  useEffect(()=>{
+    fetch (`http://localhost:5000/users/${user?.email}`)
+    .then(res=> res.json())
+    .then((data) => {
+      setUserData(data)
+    })
+  },[user])
+
+
+
+
+  useEffect(()=>{
+    fetch (`http://localhost:5000/menus/${user?.email}`)
+    .then(res=> res.json())
+    .then((data) => {
+      setDashboardMenu(data)
+    })
+  },[user])
+
+
+ const [userRole, setUserRole] = useState(null)
+  useEffect(()=>{
+    fetch (`http://localhost:5000/users/role/${user?.email}`)
+    .then(res=> res.json())
+    .then((data) => {
+      setUserRole(data[0])
+    })
+  },[user])
+
+
+
+
+
+
+
+
+
+
   
 
 
@@ -178,7 +232,9 @@ const AuthProvider = ({ children }) => {
     products,
     districts,
     upazilas,
-    userData
+    userData,
+    dashboardMenus,
+    userRole
   };
 
   return (

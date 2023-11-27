@@ -78,6 +78,8 @@ const Register = () => {
                   district,
                   upazila,
                   image: imgURL,
+                  role: 'donor',
+                  status: "active"
                 };
                 axiosPublic.post("/users", newUser).then((data) => {
                   console.log("after posting new user", data.data);

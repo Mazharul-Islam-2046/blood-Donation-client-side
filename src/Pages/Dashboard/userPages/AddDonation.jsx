@@ -87,15 +87,15 @@ const AddDonation = () => {
  
 
   return (
-    <div>
+    <div className="my-10">
       <div className="flex justify-center items-center h-auto min-h-screen">
-        <div className="flex flex-col bg-slate-300 w-3/5 py-6 px-4 justify-center items-center rounded-md">
+        <div className="flex flex-col bg-slate-300 w-4/5 py-20 px-4 justify-center items-center rounded-md">
           <h1 className="text-4xl mb-8 font-semibold">Add Donation Request</h1>
           <form
             onSubmit={handleSubmit(handleDonationRequest)}
-            className=" grid grid-cols-2"
+            className=" grid grid-cols-2 gap-20"
           >
-            <div>
+            <div className="flex flex-col items-center">
               {/* Recipent Name--------------------------------------- */}
               <FormControl
                 sx={{ m: 1, width: "40ch", mb: 4, py: 1 }}
@@ -208,7 +208,7 @@ const AddDonation = () => {
               </FormControl>
             </div>
 
-            <div>
+            <div className="flex flex-col items-center">
               {/* Blood Select----------------------------------------------------- */}
               <FormControl
                 variant="standard"
@@ -309,29 +309,6 @@ const AddDonation = () => {
                 />
                 {errors.email?.type === "required" && (
                   <p className="text-red-600">Donation is required</p>
-                )}
-              </FormControl>
-            </div>
-
-            <div className="col-span-2 flex justify-center">
-              {/* Upload Image */}
-              <FormControl
-                sx={{ m: 1, width: "75%", mb: 1, mt: 4, py: 1 }}
-                variant="standard"
-              >
-                <InputLabel shrink>Profile Picture</InputLabel>
-                <Input
-                  {...register("image", {
-                    required: true,
-                  })}
-                  type="file"
-                  endAdornment={
-                    <InputAdornment position="end"></InputAdornment>
-                  }
-                />
-
-                {errors.email?.type === "required" && (
-                  <p className="text-red-600">Name is required</p>
                 )}
               </FormControl>
             </div>
