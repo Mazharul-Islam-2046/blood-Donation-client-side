@@ -12,6 +12,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AddDonation from "./Pages/Dashboard/userPages/AddDonation.jsx";
 import UserProfile from "./Pages/Dashboard/userPages/Profile/UserProfile.jsx";
+import ProfileEdit from "./Pages/Dashboard/userPages/Profile/ProfileEdit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,12 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/profile",
-            element: <UserProfile/>
+            element: <UserProfile/>,
+            
+          },
+          {
+            path: "/dashboard/profile/edit",
+            element: <ProfileEdit/>
           }
         ],
       },
