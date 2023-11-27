@@ -85,16 +85,6 @@ const AuthProvider = ({ children }) => {
 
   // Navbar profile image
   const [photo, setPhoto] = useState(null);
-
-
-  
-
-
-
-
-
-
-
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -164,6 +154,8 @@ const AuthProvider = ({ children }) => {
     .then(res=> res.json())
     .then((data) => {
       setUserData(data)
+      setPhoto(data.image)
+
     })
   },[user])
 
@@ -198,15 +190,6 @@ const AuthProvider = ({ children }) => {
 
 
   
-
-
-// const { data: userData = [] } = useQuery({
-//   queryKey: ['userData'],
-//   queryFn: async () => {
-//       const res = await axiosPublic.get(`/users/${user.email}`);
-//       return res.data;
-//   }
-// })
 
 
 

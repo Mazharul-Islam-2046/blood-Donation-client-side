@@ -21,6 +21,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import { NavLink, Outlet } from "react-router-dom";
 import {
   AccountCircle,
+  AddCircle,
   AttachMoney,
   Book,
   DashboardCustomize,
@@ -38,6 +39,7 @@ const myDonationReq = <AttachMoney />;
 const blogIcon = <Book />;
 const profileIcon = <AccountCircle />;
 const dashboard = <DashboardCustomize />;
+const addDonation = <AddCircle/>
 
 
 
@@ -66,6 +68,10 @@ const dashBoardIcons = [
     {
         icon: profileIcon,
         name: "Profile",
+    },
+    {
+        icon: addDonation,
+        name: "Add Donation Request"
     }
     
     
