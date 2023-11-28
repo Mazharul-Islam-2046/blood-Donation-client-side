@@ -13,9 +13,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AddDonation from "./Pages/Dashboard/userPages/AddDonation.jsx";
 import UserProfile from "./Pages/Dashboard/userPages/Profile/UserProfile.jsx";
 import ProfileEdit from "./Pages/Dashboard/userPages/Profile/ProfileEdit.jsx";
-import AllUsers from "./Pages/Dashboard/AdminsPages/AllUsers.jsx";
+import AllUsers from "./Pages/Dashboard/AdminsPages/AllUsers/AllUsers.jsx";
 import AdminRoutes from "./Providers/AdminRoutes.jsx";
 import PrivateRoutes from "./Providers/PrivateRoutes.jsx";
+import AllBloodDonation from "./Pages/Dashboard/AdminsPages/AllBloodDonationPage/AllBloodDonation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/all-users",
             element: <AdminRoutes><AllUsers/></AdminRoutes>
+          },
+          {
+            path: "/dashboard/all-blood-donation-request",
+            element: <AdminRoutes><AllBloodDonation/></AdminRoutes>
           }
         ],
       },

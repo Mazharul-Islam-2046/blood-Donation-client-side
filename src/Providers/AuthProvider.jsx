@@ -184,6 +184,18 @@ const AuthProvider = ({ children }) => {
 
 
 
+  const [allUsers, setAllUsers] = useState(null)
+  useEffect(()=>{
+    fetch (`http://localhost:5000/users`)
+    .then(res=> res.json())
+    .then((data) => {
+      setAllUsers(data)
+    })
+  },[])
+
+
+
+
 
 
 
@@ -217,7 +229,8 @@ const AuthProvider = ({ children }) => {
     upazilas,
     userData,
     dashboardMenus,
-    userRole
+    userRole,
+    allUsers
   };
 
   return (
