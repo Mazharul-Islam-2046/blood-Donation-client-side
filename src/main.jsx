@@ -19,6 +19,7 @@ import PrivateRoutes from "./Providers/PrivateRoutes.jsx";
 import AllBloodDonation from "./Pages/Dashboard/AdminsPages/AllBloodDonationPage/AllBloodDonation.jsx";
 import DonationEdite from "./Pages/Dashboard/AdminsPages/DonationEditPage/DonationEdite.jsx";
 import AdminDashboard from "./Pages/Dashboard/AdminsPages/AdminDashboard/AdminDashboard.jsx";
+import BloodDonationReq from "./Pages/BloodDonationRequests/BloodDonationReq.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,9 +71,14 @@ const router = createBrowserRouter([
             path: "/dashboard/edit-donation-request/:id",
             element: <PrivateRoutes><DonationEdite></DonationEdite></PrivateRoutes>,
             loader: ({params}) => fetch(`https://blood-donation-server-snowy.vercel.app/donationReqs/${params.id}`)
-          }
+          },
         ],
       },
+      {
+        path: "/bloodDonationReqs",
+        element: <BloodDonationReq/>,
+        loader: () => fetch(`https://blood-donation-server-snowy.vercel.app/donationReqs`)
+      }
     ],
     errorElement: <Error />,
   },

@@ -54,7 +54,7 @@ const Navbar = () => {
             className={({ isActive }) =>
               isActive ? "text-blue-700" : "text-black hover:text-red-600"
             }
-            to="/donationReq"
+            to="/bloodDonationReqs"
           >
             Donation Request
           </NavLink>
