@@ -8,7 +8,7 @@ import { FaPinterestP } from "react-icons/fa6";
 
 const TopBar = () => {
   return (
-    <div className="grid grid-cols-4">
+    <div className="hidden md:grid grid-cols-4">
       <div className="bg-black flex justify-center items-center gap-3 text-white text-xl py-3 px-4">
         <FaPhone className="" />
         <div className="px-2 ml-1 border-l-2 border-white">

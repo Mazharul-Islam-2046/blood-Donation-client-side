@@ -1,6 +1,11 @@
 
 import { Helmet } from "react-helmet";
 import TopBar from "./TopBar/TopBar";
+import Navbar from "../Shared/Navbar";
+import Footer from "../Shared/Footer/Footer";
+import HeroSection from "./HeroSection/HeroSection";
+import FeaturedBlogs from "./FeaturedBlogSection/FeaturedBlogs";
+import ContactUs from "./ContactUs/ContactUs";
 
 const Home = () => {
   return (
@@ -10,7 +15,11 @@ const Home = () => {
         <title>Blood Donation || Home</title>
       </Helmet>
       <TopBar/>
-      <h1>Hello Word</h1>
+      <Navbar/>
+      <HeroSection/>
+      <FeaturedBlogs/>
+      <ContactUs/>
+      <Footer/>
     </div>
   );
 };
