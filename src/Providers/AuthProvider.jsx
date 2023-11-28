@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
-    fetch("http://localhost:5000")
+    fetch("https://blood-donation-server-snowy.vercel.app")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -126,7 +126,7 @@ const AuthProvider = ({ children }) => {
       // get and set token
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", {
+          .post("https://blood-donation-server-snowy.vercel.app/jwt", {
             email: currentUser.email,
           })
           .then((data) => {
@@ -150,7 +150,7 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(()=>{
-    fetch (`http://localhost:5000/users/${user?.email}`)
+    fetch (`https://blood-donation-server-snowy.vercel.app/users/${user?.email}`)
     .then(res=> res.json())
     .then((data) => {
       setUserData(data)
@@ -163,7 +163,7 @@ const AuthProvider = ({ children }) => {
 
 
   useEffect(()=>{
-    fetch (`http://localhost:5000/menus/${user?.email}`)
+    fetch (`https://blood-donation-server-snowy.vercel.app/menus/${user?.email}`)
     .then(res=> res.json())
     .then((data) => {
       setDashboardMenu(data)
@@ -173,7 +173,7 @@ const AuthProvider = ({ children }) => {
 
  const [userRole, setUserRole] = useState(null)
   useEffect(()=>{
-    fetch (`http://localhost:5000/users/role/${user?.email}`)
+    fetch (`https://blood-donation-server-snowy.vercel.app/users/role/${user?.email}`)
     .then(res=> res.json())
     .then((data) => {
       setUserRole(data[0])
@@ -186,7 +186,7 @@ const AuthProvider = ({ children }) => {
 
   const [allUsers, setAllUsers] = useState(null)
   useEffect(()=>{
-    fetch (`http://localhost:5000/users`)
+    fetch (`https://blood-donation-server-snowy.vercel.app/users`)
     .then(res=> res.json())
     .then((data) => {
       setAllUsers(data)
