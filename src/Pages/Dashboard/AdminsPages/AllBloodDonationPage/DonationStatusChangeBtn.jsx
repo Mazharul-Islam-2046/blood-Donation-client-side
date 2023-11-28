@@ -2,13 +2,13 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Delete, MoreVert } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+// import { Delete, MoreVert } from '@mui/icons-material';
+// import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../../../Providers/AuthProvider';
 
-export default function AllBloodDonationBtn({id}) {
+export default function DonationStausChangeBtn({id, value}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -22,8 +22,8 @@ export default function AllBloodDonationBtn({id}) {
   const [axiosSecure] = useAxiosSecure()
   const { setReqRefetch, reqRefetch } = React.useContext(AuthContext);
 
-  const handleDeleteReq = () => {
-      axiosSecure.delete(`/donationReq/delete/${id}`)
+  const handleStatusUpdate = (action) => {
+      axiosSecure.patch(`/donationReq/${action}/${id}`)
       .then(res => {
         console.log(res);
         setReqRefetch(!reqRefetch)
@@ -40,7 +40,7 @@ export default function AllBloodDonationBtn({id}) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <MoreVert/>
+        {value}
       </Button>
       <Menu
         id="demo-positioned-menu"
@@ -57,16 +57,19 @@ export default function AllBloodDonationBtn({id}) {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={handleClose}>
-          <Link to={`/dashboard/edit-donation-request/${id}`}>Edit</Link>
+        <MenuItem onClick={()=>handleStatusUpdate("done")}>
+          <button>Done</button>
         </MenuItem>
-        <MenuItem onClick={handleDeleteReq}><Delete/></MenuItem>
+        <MenuItem onClick={()=> handleStatusUpdate("canceled")}>
+            <button>Canceled</button>
+        </MenuItem>
       </Menu>
     </div>
   );
 }
 
 
-AllBloodDonationBtn.propTypes = {
-  id: PropTypes.string
+DonationStausChangeBtn.propTypes = {
+  id: PropTypes.string,
+  value: PropTypes.string
 }

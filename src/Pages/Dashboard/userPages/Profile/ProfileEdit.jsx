@@ -68,7 +68,7 @@ const ProfileEdit = () => {
           };
           axiosPublic.patch(`/users/${userData._id}`, newUser).then((data) => {
             console.log("after updating new user Data", data.data);
-            if (data.data.insertedId) {
+            if (data.data) {
               reset();
               Swal.fire({
                 position: "center",
@@ -90,7 +90,7 @@ const ProfileEdit = () => {
   return (
     <div className="flex justify-center items-center h-auto min-h-screen">
       <div className="flex flex-col bg-slate-300 w-4/5 py-6 px-4 justify-center items-center rounded-md">
-        <h1 className="text-4xl mb-8 font-semibold">Register</h1>
+        <h1 className="text-4xl mb-8 font-semibold">Edit Profile</h1>
         <form
           onSubmit={handleSubmit(handleRegister)}
           className=" grid grid-cols-2 gap-x-16"

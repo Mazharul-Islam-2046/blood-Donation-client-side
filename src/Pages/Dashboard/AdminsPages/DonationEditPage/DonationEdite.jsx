@@ -11,12 +11,12 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AuthContext } from "../../../Providers/AuthProvider";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../../Providers/AuthProvider";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
-const AddDonation = () => {
+const DonationEdite = () => {
   const {
     register,
     handleSubmit,
@@ -24,8 +24,12 @@ const AddDonation = () => {
     reset,
   } = useForm();
 
-  const [axiosPublic] = useAxiosPublic();
+//   const [axiosPublic] = useAxiosPublic();
+  const [axiosSecure] = useAxiosSecure();
   const navigate = useNavigate();
+
+
+  const donationReqData = useLoaderData()
 
   const { districts, upazilas, userData, user, reqRefetch, setReqRefetch } = useContext(AuthContext);
 
@@ -35,8 +39,6 @@ const AddDonation = () => {
 
     const {
       recipentName,
-      requesterName,
-      requesterEmail,
       hospitalName,
       addressName,
       bloodGroup,
@@ -46,8 +48,6 @@ const AddDonation = () => {
     } = data;
     const donationReq = {
       recipentName,
-      requesterName,
-      requesterEmail,
       hospitalName,
       addressName,
       bloodGroup,
@@ -58,13 +58,13 @@ const AddDonation = () => {
       donorName: "",
       donorEmail: "",
     };
-    axiosPublic.post("/addDonationReq", donationReq).then((data) => {
-      if (data.data.insertedId) {
+    axiosSecure.patch(`/donationReq/edit/${donationReqData?._id}`, donationReq).then((data) => {
+      if (data.data) {
         reset();
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Donation Request Added Successfully",
+          title: "Donation Request Upadated Successfully",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -79,7 +79,7 @@ const AddDonation = () => {
     <div className="my-10">
       <div className="flex justify-center items-center h-auto min-h-screen">
         <div className="flex flex-col bg-slate-300 w-4/5 py-20 px-4 justify-center items-center rounded-md">
-          <h1 className="text-4xl mb-8 font-semibold">Add Donation Request</h1>
+          <h1 className="text-4xl mb-8 font-semibold">Edit Donation Request</h1>
           <form
             onSubmit={handleSubmit(handleDonationRequest)}
             className=" grid grid-cols-2 gap-20"
@@ -313,7 +313,7 @@ const AddDonation = () => {
                   variant="outlined"
                 >
                   <Typography fontWeight="fontWeightBold">
-                    Add Donation Request
+                    Update Donation Request
                   </Typography>
                 </Button>
               </FormControl>
@@ -325,4 +325,4 @@ const AddDonation = () => {
   );
 };
 
-export default AddDonation;
+export default DonationEdite;

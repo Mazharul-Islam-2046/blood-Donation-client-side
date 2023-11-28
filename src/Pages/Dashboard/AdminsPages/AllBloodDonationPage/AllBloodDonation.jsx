@@ -10,6 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { AuthContext } from "../../../../Providers/AuthProvider";
 import AllBloodDonationBtn from "./AllBloodDonationBtn";
 import { Link } from "react-router-dom";
+import DonationStausChangeBtn from "./DonationStatusChangeBtn";
 
 const columns = [
   { id: "recipentName", label: "Recipent Name", minWidth: 170 },
@@ -102,13 +103,22 @@ export default function AllBloodDonation() {
                             <TableCell key={column.id} align={column.align}>
                               <AllBloodDonationBtn id={allDonationReq._id}/> 
                             </TableCell>
+                          ) : column.id === "status" ? (
+                            <TableCell key={column.id} align={column.align}>
+                              {
+                                value === "pending" ? value :
+                                value === "inprogress" ? <DonationStausChangeBtn id={allDonationReq._id} value={value}/> : value
+
+                              }
+                            </TableCell>
                           ) : (
                             <TableCell key={column.id} align={column.align}>
                               {column.format && typeof value === "number"
                                 ? column.format(value)
                                 : value}
                             </TableCell>
-                          )}
+                          )
+                        }
                         </>
                       );
                     })}

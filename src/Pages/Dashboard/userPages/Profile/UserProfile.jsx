@@ -27,7 +27,7 @@ const UserProfile = () => {
             </div>
             <div className="w-4/6">
                 <button className="w-full py-2 bg-slate-400 rounded-md mt-4 hover:bg-gray-800 hover: text-slate-100">
-                <Link to="/dashboard/profile/edit" className="text-2xl">Edit Profile</Link>
+                <Link to="/dashboard/profile/edit" className="text-2xl px-80">Edit Profile</Link>
                 </button>
             </div>
         </div>
