@@ -18,6 +18,7 @@ import AdminRoutes from "./Providers/AdminRoutes.jsx";
 import PrivateRoutes from "./Providers/PrivateRoutes.jsx";
 import AllBloodDonation from "./Pages/Dashboard/AdminsPages/AllBloodDonationPage/AllBloodDonation.jsx";
 import DonationEdite from "./Pages/Dashboard/AdminsPages/DonationEditPage/DonationEdite.jsx";
+import AdminDashboard from "./Pages/Dashboard/AdminsPages/AdminDashboard/AdminDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
         children: [
+          {
+            path:"/dashboard",
+            element: <AdminDashboard/>
+          },
           {
             path: "/dashboard/addDonationRequest",
             element: <AddDonation/>

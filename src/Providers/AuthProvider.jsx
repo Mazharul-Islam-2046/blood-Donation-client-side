@@ -218,6 +218,22 @@ const AuthProvider = ({ children }) => {
 
 
 
+ const [myReqs, setMyReqs] = useState([])
+  useEffect(()=>{
+    fetch (`https://blood-donation-server-snowy.vercel.app/donationReqs/email/${userData?.email}`)
+    .then(res=> res.json())
+    .then((data) => {
+      setMyReqs(data)
+    })
+  },[userData])
+
+
+
+
+
+
+
+
 
   
 
@@ -251,7 +267,8 @@ const AuthProvider = ({ children }) => {
     allUsers,
     setUserRefetch,
     allDonationReqs,
-    setReqRefetch
+    setReqRefetch,
+    myReqs
   };
 
   return (
