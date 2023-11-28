@@ -185,13 +185,31 @@ const AuthProvider = ({ children }) => {
 
 
   const [allUsers, setAllUsers] = useState(null)
+  const [userRefetch, setUserRefetch] = useState(false)
   useEffect(()=>{
     fetch (`https://blood-donation-server-snowy.vercel.app/users`)
     .then(res=> res.json())
     .then((data) => {
       setAllUsers(data)
     })
-  },[])
+  },[userRefetch])
+
+
+
+
+
+
+
+  const [allDonationReqs, setAllDonationReqs] = useState(null)
+  const [reqRefetch, setReqRefetch] = useState(false)
+
+  useEffect(()=>{
+    fetch (`https://blood-donation-server-snowy.vercel.app/donationReqs`)
+    .then(res=> res.json())
+    .then((data) => {
+      setAllDonationReqs(data)
+    })
+  },[reqRefetch])
 
 
 
@@ -230,7 +248,10 @@ const AuthProvider = ({ children }) => {
     userData,
     dashboardMenus,
     userRole,
-    allUsers
+    allUsers,
+    setUserRefetch,
+    allDonationReqs,
+    setReqRefetch
   };
 
   return (

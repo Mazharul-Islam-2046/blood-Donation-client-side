@@ -8,18 +8,36 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { AuthContext } from "../../../../Providers/AuthProvider";
-import { Avatar } from "@mui/material";
 import AllBloodDonationBtn from "./AllBloodDonationBtn";
+import { Link } from "react-router-dom";
 
 const columns = [
-  { id: "image", label: "Image", minWidth: 170 },
-  { id: "email", label: "Email", minWidth: 100 },
-  { id: "name", label: "Name", minWidth: 170 },
+  { id: "recipentName", label: "Recipent Name", minWidth: 170 },
+  { id: "requesterEmail", label: "Recipent Email", minWidth: 100, align: "center" },
+  { id: "donationDate", label: "Donation Date", minWidth: 170, align:"center" },
   {
     id: "status",
-    label: "Staus",
+    label: "Donation Staus",
     minWidth: 170,
-    align: "right",
+    align: "center",
+  },
+  {
+    id: "donorName",
+    label: "Donor Name",
+    minWidth: 170,
+    align: "center",
+  },
+  {
+    id: "donorEmail",
+    label: "Donor Email",
+    minWidth: 170,
+    align: "center",
+  },
+  {
+    id: "viewDetails",
+    label: "View Details",
+    minWidth: 170,
+    align: "center",
   },
   {
     id: "menu",
@@ -30,7 +48,7 @@ const columns = [
 ];
 
 export default function AllBloodDonation() {
-  const { allUsers } = React.useContext(AuthContext);
+  const { allDonationReqs } = React.useContext(AuthContext);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -62,27 +80,27 @@ export default function AllBloodDonation() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {allUsers
+            {allDonationReqs
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((allUser) => {
+              .map((allDonationReq) => {
                 return (
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={allUsers._id}
+                    key={allDonationReqs._id}
                   >
                     {columns.map((column) => {
-                      const value = allUser[column.id];
+                      const value = allDonationReq[column.id];
                       return (
                         <>
-                          {column.id === "image" ? (
+                          {column.id === "viewDetails" ? (
                             <TableCell key={column.id} align={column.align}>
-                              <Avatar alt="image" src={value} />
+                              <Link to={`/dashBoard/req-details/${allDonationReq._id}`}>Veiw Details</Link>
                             </TableCell>
                           ) : column.id === "menu" ? (
                             <TableCell key={column.id} align={column.align}>
-                              <AllBloodDonationBtn/> 
+                              <AllBloodDonationBtn id={allDonationReq._id}/> 
                             </TableCell>
                           ) : (
                             <TableCell key={column.id} align={column.align}>
@@ -103,7 +121,7 @@ export default function AllBloodDonation() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={allUsers.length}
+        count={allDonationReqs.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
