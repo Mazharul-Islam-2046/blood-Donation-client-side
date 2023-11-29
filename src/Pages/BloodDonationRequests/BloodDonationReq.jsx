@@ -42,7 +42,7 @@ const BloodDonationReq = () => {
               </div>
             </div>
 
-            <button className="mt-6 py-2 px-6 bg-red-400 hover:bg-gray-800 text-white"><Link>View Details</Link></button>
+            <button className="mt-6 py-2 px-6 bg-red-400 hover:bg-gray-800 text-white"><Link to={`/bloodDonationReqs/id/${allDonationReq._id}`}>View Details</Link></button>
           </div>
         ))}
       </div>

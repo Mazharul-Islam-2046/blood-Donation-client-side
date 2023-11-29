@@ -23,7 +23,9 @@ export default function DonationStausChangeBtn({id, value}) {
   const { setReqRefetch, reqRefetch } = React.useContext(AuthContext);
 
   const handleStatusUpdate = (action) => {
-      axiosSecure.patch(`/donationReq/${action}/${id}`)
+
+      const status = {status: action}
+      axiosSecure.patch(`/donationReq/${id}`, status)
       .then(res => {
         console.log(res);
         setReqRefetch(!reqRefetch)

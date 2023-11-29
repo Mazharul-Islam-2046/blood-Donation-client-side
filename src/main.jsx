@@ -21,6 +21,7 @@ import DonationEdite from "./Pages/Dashboard/AdminsPages/DonationEditPage/Donati
 import AdminDashboard from "./Pages/Dashboard/AdminsPages/AdminDashboard/AdminDashboard.jsx";
 import BloodDonationReq from "./Pages/BloodDonationRequests/BloodDonationReq.jsx";
 import Search from "./Pages/Search/Search.jsx";
+import BloodDonationReqDetails from "./Pages/BloodDonationRequests/BloodDonationReqDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,54 +42,77 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+        element: (
+          <PrivateRoutes>
+            <Dashboard />
+          </PrivateRoutes>
+        ),
         children: [
           {
-            path:"/dashboard",
-            element: <AdminDashboard/>
+            path: "/dashboard",
+            element: <AdminDashboard />,
           },
           {
             path: "/dashboard/addDonationRequest",
-            element: <AddDonation/>
+            element: <AddDonation />,
           },
           {
             path: "/dashboard/profile",
-            element: <UserProfile/>,
-            
+            element: <UserProfile />,
           },
           {
             path: "/dashboard/profile/edit",
-            element: <ProfileEdit/>
+            element: <ProfileEdit />,
           },
           {
             path: "/dashboard/all-users",
-            element: <AdminRoutes><AllUsers/></AdminRoutes>
+            element: (
+              <AdminRoutes>
+                <AllUsers />
+              </AdminRoutes>
+            ),
           },
           {
             path: "/dashboard/all-blood-donation-request",
-            element: <AllBloodDonation/>
+            element: <AllBloodDonation />,
           },
           {
             path: "/dashboard/edit-donation-request/:id",
-            element: <PrivateRoutes><DonationEdite></DonationEdite></PrivateRoutes>,
-            loader: ({params}) => fetch(`https://blood-donation-server-snowy.vercel.app/donationReqs/${params.id}`)
+            element: (
+              <PrivateRoutes>
+                <DonationEdite></DonationEdite>
+              </PrivateRoutes>
+            ),
+            loader: ({ params }) =>
+              fetch(
+                `https://blood-donation-server-snowy.vercel.app/donationReqs/${params.id}`
+              ),
           },
         ],
       },
       {
         path: "/bloodDonationReqs",
-        element: <BloodDonationReq/>,
-        loader: () => fetch(`https://blood-donation-server-snowy.vercel.app/donationReqs`)
+        element: <BloodDonationReq />,
+        loader: () =>
+          fetch(`https://blood-donation-server-snowy.vercel.app/donationReqs`),
       },
       {
+        path: "/bloodDonationReqs/id/:id",
+        element: <PrivateRoutes><BloodDonationReqDetails /></PrivateRoutes>,
+        loader: ({ params }) =>
+          fetch(
+            `https://blood-donation-server-snowy.vercel.app/donationReqs/${params.id}`
+          ),
+      },
+
+      {
         path: "/search",
-        element: <Search/>
-      }
+        element: <Search />,
+      },
     ],
     errorElement: <Error />,
   },
 ]);
-
 
 const queryClient = new QueryClient();
 

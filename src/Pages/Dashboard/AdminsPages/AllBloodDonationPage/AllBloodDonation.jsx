@@ -50,7 +50,7 @@ const columns = [
 
 export default function AllBloodDonation() {
   const { allDonationReqs, userData, myReqs } = React.useContext(AuthContext);
-  const {role} = userData
+  const role = userData?.role
   const donationReqDatas = role === "donor" ?  myReqs : allDonationReqs
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
