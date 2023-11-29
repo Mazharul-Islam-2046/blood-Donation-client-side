@@ -20,6 +20,7 @@ import AllBloodDonation from "./Pages/Dashboard/AdminsPages/AllBloodDonationPage
 import DonationEdite from "./Pages/Dashboard/AdminsPages/DonationEditPage/DonationEdite.jsx";
 import AdminDashboard from "./Pages/Dashboard/AdminsPages/AdminDashboard/AdminDashboard.jsx";
 import BloodDonationReq from "./Pages/BloodDonationRequests/BloodDonationReq.jsx";
+import Search from "./Pages/Search/Search.jsx";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
         path: "/bloodDonationReqs",
         element: <BloodDonationReq/>,
         loader: () => fetch(`https://blood-donation-server-snowy.vercel.app/donationReqs`)
+      },
+      {
+        path: "/search",
+        element: <Search/>
       }
     ],
     errorElement: <Error />,

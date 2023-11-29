@@ -233,7 +233,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-
+  const [searchedUsers, setSearchedUsers] = useState([])
 
   
 
@@ -268,7 +268,9 @@ const AuthProvider = ({ children }) => {
     setUserRefetch,
     allDonationReqs,
     setReqRefetch,
-    myReqs
+    myReqs,
+    setSearchedUsers,
+    searchedUsers
   };
 
   return (
