@@ -49,8 +49,9 @@ const columns = [
 ];
 
 export default function AllBloodDonation() {
-  const { allDonationReqs } = React.useContext(AuthContext);
-
+  const { allDonationReqs, userData, myReqs } = React.useContext(AuthContext);
+  const {role} = userData
+  const donationReqDatas = role === "donor" ?  myReqs : allDonationReqs
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -64,7 +65,9 @@ export default function AllBloodDonation() {
   };
 
   return (
-    <Paper sx={{ width: "100vw", overflow: "hidden" }}>
+    <div>
+      <h2 className="text-xl md:text-4xl font-bold text-center mt-4 mb-12">{userData.role === "donor" ? "My Donation Requests" : "All Donation Requests"}</h2>
+      <Paper sx={{ width: "90vw", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -81,7 +84,7 @@ export default function AllBloodDonation() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {allDonationReqs
+            {donationReqDatas
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((allDonationReq) => {
                 return (
@@ -89,7 +92,7 @@ export default function AllBloodDonation() {
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={allDonationReqs._id}
+                    key={donationReqDatas._id}
                   >
                     {columns.map((column) => {
                       const value = allDonationReq[column.id];
@@ -131,12 +134,13 @@ export default function AllBloodDonation() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={allDonationReqs.length}
+        count={donationReqDatas.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
   );
 }

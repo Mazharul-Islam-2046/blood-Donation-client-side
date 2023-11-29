@@ -66,7 +66,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/all-blood-donation-request",
-            element: <AdminRoutes><AllBloodDonation/></AdminRoutes>
+            element: <AllBloodDonation/>
           },
           {
             path: "/dashboard/edit-donation-request/:id",

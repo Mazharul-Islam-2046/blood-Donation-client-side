@@ -45,7 +45,9 @@ export default function AllUsers() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <div>
+      <h2 className="text-xl md:text-4xl font-bold text-center mt-4 mb-12">All Users</h2>
+      <Paper sx={{ width: "90vw", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -110,5 +112,6 @@ export default function AllUsers() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ const UserProfile = () => {
 
   return (
     <div className="flex flex-col justify-center items-center text-gray-300 mt-2">
+      <h2 className="text-xl md:text-4xl font-bold text-center mt-2 mb-8 text-black">Your Profile</h2>
       <div className="w-4/6 bg-red-400 grid grid-cols-2 py-8 rounded-md">
         <div className="flex flex-col justify-center items-center px-4 border-r-2 border-white">
           <img

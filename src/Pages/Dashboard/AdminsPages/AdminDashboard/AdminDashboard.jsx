@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const [isAdmin] = useAdmin();
   return (
     <div className="mb-20 mt-8">
-      <h1 className="text-4xl font-bold mb-10 ml-2">
+      <h1 className="text-xl md:text-4xl font-bold mb-10 ml-2 text-center">
         Welcome To The Dashboard
       </h1>
 
@@ -26,37 +26,37 @@ const AdminDashboard = () => {
       </div>
 
       {isAdmin && (
-        <div className="grid grid-cols-3 gap-x-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-4">
           {/* Card 1 */}
-          <div className="flex flex-col py-8 px-5 text-center items-center bg-slate-400">
-            <h2 className="text-4xl font-bold mb-6 text-white">Total Users</h2>
+          <div className="flex flex-col py-8 px-1 md:px-5 text-center items-center bg-slate-400">
+            <h2 className="text-xl md:text-4xl font-bold mb-6 text-white">Total Users</h2>
             <div className="flex justify-center items-center">
               <PeopleAlt fontSize="large" />
-              <p className="text-4xl font-semibold">---{allUsers?.length}</p>
+              <p className="text-xl md:text-4xl font-semibold">---{allUsers?.length}</p>
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="flex flex-col py-8 px-5 text-center items-center bg-slate-400">
-            <h2 className="text-4xl font-bold mb-6 text-white">
+          <div className="flex flex-col py-8 px-1 md:px-5 text-center items-center bg-slate-400">
+            <h2 className="text-xl md:text-4xl font-bold mb-6 text-white">
               Total Donation Request
             </h2>
             <div className="flex justify-center items-center">
               <VolunteerActivism fontSize="large" />
-              <p className="text-4xl font-semibold">
+              <p className="text-xl md:text-4xl font-semibold">
                 ---{allDonationReqs?.length}
               </p>
             </div>
           </div>
 
           {/* Card 3 */}
-          <div className="flex flex-col py-8 px-5 text-center items-center bg-slate-400">
-            <h2 className="text-4xl font-bold mb-6 text-white">
+          <div className="flex flex-col py-8 px-1 md:px-5 text-center items-center bg-slate-400">
+            <h2 className="text-xl md:text-4xl font-bold mb-6 text-white">
               Total Funding
             </h2>
             <div className="flex justify-center items-center">
               <MonetizationOn fontSize="large" />
-              <p className="text-4xl font-semibold">---{0}$</p>
+              <p className="text-xl md:text-4xl font-semibold">---{0}$</p>
             </div>
           </div>
         </div>
