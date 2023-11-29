@@ -82,7 +82,7 @@ export default function AllUsers() {
                             </TableCell>
                           ) : column.id === "menu" ? (
                             <TableCell key={column.id} align={column.align}>
-                              <PositionedMenu/> 
+                              <PositionedMenu status = {allUser.status} id={allUser._id}/> 
                             </TableCell>
                           ) : (
                             <TableCell key={column.id} align={column.align}>

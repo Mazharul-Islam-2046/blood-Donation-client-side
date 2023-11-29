@@ -16,8 +16,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { NavLink, Outlet } from "react-router-dom";
 import {
   AccountCircle,
@@ -26,7 +24,9 @@ import {
   Book,
   DashboardCustomize,
   Group,
+  Home,
   RequestPage,
+  Search,
 } from "@mui/icons-material";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext } from "react";
@@ -39,48 +39,38 @@ const myDonationReq = <AttachMoney />;
 const blogIcon = <Book />;
 const profileIcon = <AccountCircle />;
 const dashboard = <DashboardCustomize />;
-const addDonation = <AddCircle/>
-
-
+const addDonation = <AddCircle />;
 
 const dashBoardIcons = [
-    {
-        icon: dashboard,
-        name: "Dashboard"
-    },
-    {
-        icon: usersIcon,
-        name: "All Users",
-    },
-    {
-        icon: donationreq,
-        name: "All Donation Request",
-
-    },
-    {
-        icon: myDonationReq,
-        name: "My Donation Request",
-    },
-    {
-        icon: blogIcon,
-        name: "Add Blog",
-    },
-    {
-        icon: profileIcon,
-        name: "Profile",
-    },
-    {
-        icon: addDonation,
-        name: "Add Donation Request"
-    }
-    
-    
-    
-    
-  ];
-
-
-
+  {
+    icon: dashboard,
+    name: "Dashboard",
+  },
+  {
+    icon: usersIcon,
+    name: "All Users",
+  },
+  {
+    icon: donationreq,
+    name: "All Donation Request",
+  },
+  {
+    icon: myDonationReq,
+    name: "My Donation Request",
+  },
+  {
+    icon: blogIcon,
+    name: "Add Blog",
+  },
+  {
+    icon: profileIcon,
+    name: "Profile",
+  },
+  {
+    icon: addDonation,
+    name: "Add Donation Request",
+  },
+];
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -153,7 +143,6 @@ export default function Dashboard() {
 
   const { dashboardMenus } = useContext(AuthContext);
 
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -214,7 +203,8 @@ export default function Dashboard() {
                     }}
                   >
                     {
-                     dashBoardIcons.find(item => item.name === menu.name)?.icon
+                      dashBoardIcons.find((item) => item.name === menu.name)
+                        ?.icon
                     }
                   </ListItemIcon>
                   <ListItemText
@@ -228,8 +218,9 @@ export default function Dashboard() {
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
+          {["home", "search"].map((text) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <NavLink to={text === "home" ? `/`:`/${text}`}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -244,10 +235,13 @@ export default function Dashboard() {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {
+                    text === "home" ? <Home/> : <Search/>
+                  }
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
+              </NavLink>
             </ListItem>
           ))}
         </List>

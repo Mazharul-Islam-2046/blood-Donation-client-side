@@ -4,8 +4,8 @@ const FeaturedBlogs = () => {
   return (
     <div className="pt-20 bg-gray-200 pb-24">
       <h1 className="text-center text-5xl font-bold mt-28 mb-12 text-red-500">Popular Blogs</h1>
-      <div className="flex justify-center items-center px-20 gap-5">
-        <div className="bg-white p-6 flex gap-8">
+      <div className="flex flex-col md:flex-row justify-center items-center px-4 md:px-20 gap-5">
+        <div className="bg-white p-6 flex flex-col md:flex-row gap-8">
           <img className="h-44 w-44 object-cover" src="https://i.ibb.co/0YMYq2J/sbv-HNo-N3-KYdvj-JUXz-FPi-D.png" alt="" />
           <div>
             <div>
@@ -24,7 +24,7 @@ const FeaturedBlogs = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white p-6 flex gap-8">
+        <div className="bg-white p-6 flex flex-col md:flex-row gap-8">
           <img className="h-44 w-44 object-cover" src="https://i.ibb.co/0YMYq2J/sbv-HNo-N3-KYdvj-JUXz-FPi-D.png" alt="" />
           <div>
             <div>

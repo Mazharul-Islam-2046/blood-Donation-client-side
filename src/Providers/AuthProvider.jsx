@@ -25,7 +25,6 @@ const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
   const [axiosPublic] = useAxiosPublic()
   const [dashboardMenus, setDashboardMenu] = useState([]);
 
@@ -37,25 +36,6 @@ const AuthProvider = ({ children }) => {
         return res.data;
     }
 })
-
-
-
-
-
-
-  useEffect(() => {
-    fetch("https://blood-donation-server-snowy.vercel.app")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-      });
-  }, []);
-
-
-
-
-
-
 
 
 
@@ -258,7 +238,6 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     setPhoto,
     photo,
-    products,
     districts,
     upazilas,
     userData,
