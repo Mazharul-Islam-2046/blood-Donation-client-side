@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { AuthContext } from '../../../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 export default function AllBloodDonationBtn({id}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -23,12 +24,30 @@ export default function AllBloodDonationBtn({id}) {
   const { setReqRefetch, reqRefetch } = React.useContext(AuthContext);
 
   const handleDeleteReq = () => {
-      axiosSecure.delete(`/donationReq/delete/${id}`)
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/donationReq/delete/${id}`)
       .then(res => {
         console.log(res);
         setReqRefetch(!reqRefetch)
       })
       setAnchorEl(null);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+      
   }
 
   return (

@@ -32,6 +32,15 @@ const AddDonation = () => {
   const handleDonationRequest = (data) => {
     console.log("working");
     console.log(data);
+    if (userData.status === "block") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You are Blocked by Admin",
+      });
+      navigate("/dashboard");
+      return console.log("You are blocked By Admin");
+    }
 
     const {
       recipentName,

@@ -19,7 +19,7 @@ const BloodDonationReq = () => {
 
       <div className=" bg-gray-700">
         <h3 className="text-5xl text-white font-bold text-center pt-20">All Donation Requests</h3>
-      <div className="grid grid-cols-4 py-20 px-16">
+      <div className="grid grid-cols-1 md:grid-cols-4 py-20 px-16 gap-x-4 gap-y-4">
         {allDonationReqs.map((allDonationReq, idx) => (
           <div key={idx} className="bg-white pt-10 pb-7 px-6 rounded-md">
             <h1 className="text-3xl font-bold mb-4">
