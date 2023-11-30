@@ -222,6 +222,7 @@ const AuthProvider = ({ children }) => {
 
 
   const [blogs, setBlogs] = useState()
+  const [blogsFetch, setBlogFetch] = useState(true)
 
   useEffect(()=>{
     fetch (`https://blood-donation-server-snowy.vercel.app/blogs`)
@@ -229,7 +230,7 @@ const AuthProvider = ({ children }) => {
     .then((data) => {
       setBlogs(data)
     })
-  },[reqRefetch])
+  },[blogsFetch])
 
 
 
@@ -261,7 +262,9 @@ const AuthProvider = ({ children }) => {
     myReqs,
     setSearchedUsers,
     searchedUsers,
-    blogs
+    blogs,
+    setBlogFetch,
+    blogsFetch
   };
 
   return (

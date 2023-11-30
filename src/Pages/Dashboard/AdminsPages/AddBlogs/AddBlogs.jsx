@@ -7,6 +7,7 @@ import { AuthContext } from "../../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import DashboardBlogs from "./DashboardBlogs";
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -29,9 +30,10 @@ const AddBlogs = () => {
   } = useForm();
 
 
-  const {userData, loading} = useContext(AuthContext)
+  const {userData, loading, blogsFetch, setBlogFetch} = useContext(AuthContext)
   const navigate = useNavigate();
   const [axiosPublic] = useAxiosPublic()
+  const imageKey = import.meta.env.VITE_IMG_BB_API_KEY;
 
 
   const handleBlogAdd = (data) => {
@@ -44,34 +46,44 @@ const AddBlogs = () => {
         navigate("/dashboard");
         return console.log("You are blocked By Admin");
       }
+      const img_hosting_url = `https://api.imgbb.com/1/upload?key=${imageKey}`;
+
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
+
+      const { title, blog } = data;
+      fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      })
   
-      const {
-        title,
-        blog,
-        image
-      } = data;
-      const blogData = {
-        title,
-        blog,
-        image,
-        writer: userData.name,
-        email: userData.email,
-        status: "draft",
-      };
-      axiosPublic.post("/blogs/addBlogs", blogData).then((data) => {
-        if (data.data.insertedId) {
-          reset();
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Blog Added Successfully",
-            showConfirmButton: false,
-            timer: 1500,
+
+      .then((res) => res.json())
+        .then((imgResponse) => {
+          const blogData = {
+            title,
+            blog,
+            image: imgResponse.data.display_url,
+            writer: userData.name,
+            email: userData.email,
+            status: "draft",
+          };
+          axiosPublic.post("/blogs/addBlogs", blogData).then((data) => {
+            if (data.data.insertedId) {
+              setBlogFetch(!blogsFetch)
+              reset();
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Blog Added Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              
+              navigate("/dashboard");
+            }
           });
-          
-          navigate("/dashboard");
-        }
-      });
+        })
   }
 
   return (
@@ -150,6 +162,7 @@ const AddBlogs = () => {
                   </FormControl>
               </div>
             </form>
+            <DashboardBlogs/>
           </div>
         }
       
