@@ -19,7 +19,7 @@ const FeaturedBlogs = () => {
             <img className="h-44 w-44 object-cover" src={blog?.image} alt="" />
             <div>
               <h3 className="text-2xl font-bold">{blog?.title}</h3>
-              <p className="text-lg text-gray-700">{blog?.blog}</p>
+              <p className="text-lg text-gray-700">{blog?.blog.slice(0, 90)}...</p>
               <button
                 className="py-3 px-5 bg-red-600 mt-8 rounded-md ml-1
              text-white hover:bg-gray-800"
