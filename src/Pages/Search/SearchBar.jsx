@@ -60,7 +60,7 @@ export default function SearchBar() {
                 {text === "Home" ? <Home/> : text === "Dashboard" ? <Dashboard/> : <Book/>}
               </ListItemIcon>
               <ListItemText>
-                <Link to={text === "Home" ? "/" : text === "Dashboard" ? "/dashboard" : "/"}>{text}</Link>
+                <Link to={text === "Home" ? "/" : text === "Dashboard" ? "/dashboard" : "/blogs"}>{text}</Link>
               </ListItemText>
             </ListItemButton>
           </ListItem>

@@ -43,7 +43,7 @@ const HeroSection = () => {
             </p>
           </div>
           <div className="flex items-end">
-            <Link>
+            <Link to="/search">
               <FaArrowAltCircleRight />
             </Link>
           </div>

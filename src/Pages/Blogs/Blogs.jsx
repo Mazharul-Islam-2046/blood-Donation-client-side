@@ -25,7 +25,7 @@ const Blogs = () => {
                       </p>
                       <button className="py-3 px-5 bg-red-600 mt-8 rounded-md ml-1
                        text-white">
-                        <Link to={`/blogs-deatails/${publishedBlog._id}`}>Read More</Link>
+                        <Link to={`/blogs-details/${publishedBlog._id}`}>Read More</Link>
                       </button>
                     </div>
                   </div>))

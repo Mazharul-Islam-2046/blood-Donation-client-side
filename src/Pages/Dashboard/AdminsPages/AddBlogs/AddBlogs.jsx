@@ -162,7 +162,9 @@ const AddBlogs = () => {
                   </FormControl>
               </div>
             </form>
-            <DashboardBlogs/>
+            {
+              userData.role === "admin" ? <DashboardBlogs/> : <div></div>
+            }
           </div>
         }
       
