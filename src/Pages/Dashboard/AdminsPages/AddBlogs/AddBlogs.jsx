@@ -156,7 +156,7 @@ const AddBlogs = () => {
                       variant="outlined"
                     >
                       <Typography fontWeight="fontWeightBold">
-                        Add Donation Request
+                        Add Blog
                       </Typography>
                     </Button>
                   </FormControl>
