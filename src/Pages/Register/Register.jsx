@@ -16,6 +16,20 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useContext, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import styled from "@emotion/styled";
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -342,23 +356,17 @@ const Register = () => {
 
           <div className="col-span-2 flex justify-center">
             {/* Upload Image */}
-            <FormControl
-              sx={{ m: 1, width: "75%", mb: 1, mt: 4, py: 1 }}
-              variant="standard"
+            <Button
+            sx={{ width: "75%", mb: "16"}}
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
             >
-              <InputLabel shrink>Profile Picture</InputLabel>
-              <Input
-                {...register("image", {
+              Upload file
+              <VisuallyHiddenInput {...register("image", {
                   required: true,
-                })}
-                type="file"
-                endAdornment={<InputAdornment position="end"></InputAdornment>}
-              />
-
-              {errors.email?.type === "required" && (
-                <p className="text-red-600">Name is required</p>
-              )}
-            </FormControl>
+                })} type="file" />
+            </Button>
           </div>
 
           <div className="col-span-2 flex justify-center">

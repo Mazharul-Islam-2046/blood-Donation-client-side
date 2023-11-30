@@ -125,16 +125,18 @@ const AuthProvider = ({ children }) => {
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [user]);
 
 
 
 
   useEffect(()=>{
+    setLoading(true)
     fetch (`https://blood-donation-server-snowy.vercel.app/users/${user?.email}`)
     .then(res=> res.json())
     .then((data) => {
       setUserData(data)
+      setLoading(false)
       setPhoto(data.image)
 
     })

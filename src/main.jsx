@@ -22,6 +22,8 @@ import AdminDashboard from "./Pages/Dashboard/AdminsPages/AdminDashboard/AdminDa
 import BloodDonationReq from "./Pages/BloodDonationRequests/BloodDonationReq.jsx";
 import Search from "./Pages/Search/Search.jsx";
 import BloodDonationReqDetails from "./Pages/BloodDonationRequests/BloodDonationReqDetails.jsx";
+import VolunteerRoutes from "./Providers/VolunteerRoutes.jsx";
+import AddBlogs from "./Pages/Dashboard/AdminsPages/AddBlogs/AddBlogs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -74,7 +76,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard/all-blood-donation-request",
-            element: <AllBloodDonation />,
+            element: <VolunteerRoutes><AllBloodDonation /></VolunteerRoutes>,
           },
           {
             path: "/dashboard/edit-donation-request/:id",
@@ -88,6 +90,10 @@ const router = createBrowserRouter([
                 `https://blood-donation-server-snowy.vercel.app/donationReqs/${params.id}`
               ),
           },
+          {
+            path: "/dashboard/content-management",
+            element: <VolunteerRoutes><AddBlogs></AddBlogs></VolunteerRoutes>
+          }
         ],
       },
       {
