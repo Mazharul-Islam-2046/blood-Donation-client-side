@@ -54,7 +54,12 @@ export default function BlogBtn({ id }) {
 const handlePublish = () => {
     axiosSecure.patch(`/blogs/publish/${id}`)
     .then((res) => {
-        console.log(res);
+        Swal.fire({
+            title: "Published!",
+            text: "Your Blog has been Published.",
+            icon: "success"
+          });
+          console.log(res);
     })
 }
 
