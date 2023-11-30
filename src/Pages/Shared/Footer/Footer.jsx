@@ -8,9 +8,9 @@ const Footer = () => {
     <div>
       <div className="bg-slate-900 text-white pt-24 pb-20 font-semibold text-lg text-center">
         <div className="flex justify-center items-center gap-3 text-gray-300 mb-4">
-            <Link>Home</Link>
-            <Link>Login</Link>
-            <Link>Register</Link>
+            <Link to="/">Home</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
         </div>
         <div className="flex justify-center items-center gap-3 mb-6">
             <FaFacebookF/>
