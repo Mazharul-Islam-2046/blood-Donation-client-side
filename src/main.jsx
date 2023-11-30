@@ -24,6 +24,7 @@ import Search from "./Pages/Search/Search.jsx";
 import BloodDonationReqDetails from "./Pages/BloodDonationRequests/BloodDonationReqDetails.jsx";
 import VolunteerRoutes from "./Providers/VolunteerRoutes.jsx";
 import AddBlogs from "./Pages/Dashboard/AdminsPages/AddBlogs/AddBlogs.jsx";
+import EditBlogs from "./Pages/Dashboard/AdminsPages/EditBlogs/EditBlogs.jsx";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,11 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/content-management",
             element: <VolunteerRoutes><AddBlogs></AddBlogs></VolunteerRoutes>
+          },
+          {
+            path: "/dashboard/edit-blogs/:id",
+            element: <AdminRoutes><EditBlogs/></AdminRoutes>,
+            loader: ({params}) => fetch(`https://blood-donation-server-snowy.vercel.app/blogs/${params.id}`)
           }
         ],
       },

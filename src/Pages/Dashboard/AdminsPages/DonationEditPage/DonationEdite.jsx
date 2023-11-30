@@ -31,7 +31,7 @@ const DonationEdite = () => {
 
   const donationReqData = useLoaderData()
 
-  const { districts, upazilas, userData, user, reqRefetch, setReqRefetch } = useContext(AuthContext);
+  const { districts, upazilas, reqRefetch, setReqRefetch } = useContext(AuthContext);
 
   const handleDonationRequest = (data) => {
     console.log("working");
@@ -54,9 +54,6 @@ const DonationEdite = () => {
       recipentDistrict,
       recipentUpazila,
       donationDate,
-      status: "pending",
-      donorName: "",
-      donorEmail: "",
     };
     axiosSecure.patch(`/donationReq/edit/${donationReqData?._id}`, donationReq).then((data) => {
       if (data.data) {
@@ -117,7 +114,7 @@ const DonationEdite = () => {
                   {...register("requesterName")}
                   id="outlined-read-only-input"
                   type="text"
-                  value={userData?.name}
+                  value={donationReqData.requesterName}
                   variant="standard"
                   InputProps={{
                     readOnly: true,
@@ -143,7 +140,7 @@ const DonationEdite = () => {
                   {...register("requesterEmail")}
                   type="text"
                   variant="standard"
-                  value={user?.email}
+                  value={donationReqData?.requesterEmail}
                   InputProps={{
                     readOnly: true,
                   }}

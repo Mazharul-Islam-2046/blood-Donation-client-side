@@ -1,0 +1,215 @@
+import {
+  Button,
+  FormControl,
+  Input,
+  InputAdornment,
+  InputLabel,
+  Typography,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import styled from "@emotion/styled";
+import { useContext } from "react";
+import { AuthContext } from "../../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useLoaderData, useNavigate } from "react-router-dom";
+// import useAxiosPublic from "../../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+const imageKey = import.meta.env.VITE_IMG_BB_API_KEY;
+
+const EditBlogs = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const { userData, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+//   const [axiosPublic] = useAxiosPublic();
+  const [axiosSecure] = useAxiosSecure()
+  const blogsData = useLoaderData();
+  console.log(blogsData);
+
+  const handleBlogEdit = (data) => {
+    if (userData.status === "block") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You are Blocked by Admin",
+      });
+      navigate("/dashboard");
+      return console.log("You are blocked By Admin");
+    }
+    if (data.image) {
+      const img_hosting_url = `https://api.imgbb.com/1/upload?key=${imageKey}`;
+
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
+
+      const { title, blog } = data;
+      fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((imgResponse) => {
+          const blogData = {
+            title,
+            blog,
+            image: imgResponse.data.display_url,
+            writer: userData.name,
+            email: userData.email,
+            status: "draft",
+          };
+          axiosSecure.patch(`/blogs/update/${blogsData._id}`, blogData).then((data) => {
+            if (data) {
+              reset();
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Blog Edited Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              navigate("/dashboard");
+            }
+          });
+        });
+    }else {
+        const { title, blog, image } = data;
+        const blogData = {
+            title,
+            blog,
+            image,
+            writer: userData.name,
+            email: userData.email,
+            status: "draft",
+          };
+          axiosSecure.patch(`/blogs/update/${blogsData._id}`, blogData).then((data) => {
+            if (data) {
+              reset();
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Blog Edited Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              navigate("/dashboard");
+            }
+          });
+    }
+  };
+
+  return (
+    <div className="flex justify-center">
+      {loading ? (
+        <div>
+          <h1>loading</h1>
+        </div>
+      ) : (
+        <div>
+          <h2 className="text-4xl font-bold text-center mb-6 mt-2">
+            Edit Blog
+          </h2>
+          <form onSubmit={handleSubmit(handleBlogEdit)}>
+            <div className="flex flex-col items-center">
+              <FormControl
+                sx={{ m: 1, width: "100ch", mb: 4, py: 1 }}
+                variant="standard"
+              >
+                <InputLabel htmlFor="Title of the Blog">
+                  Title of the Blog
+                </InputLabel>
+                <Input
+                  {...register("title", {
+                    required: true,
+                  })}
+                  type="text"
+                  defaultValue={blogsData.title}
+                  endAdornment={
+                    <InputAdornment position="end"></InputAdornment>
+                  }
+                />
+                {errors.email?.type === "required" && (
+                  <p className="text-red-600">Title of the Blog is required</p>
+                )}
+              </FormControl>
+
+              <FormControl
+                sx={{ m: 1, width: "100ch", mb: 4, py: 1 }}
+                variant="standard"
+              >
+                <InputLabel htmlFor="Blog Content">Blog Content</InputLabel>
+                <Input
+                  sx={{ borderColor: "#FF2400", color: "#235870" }}
+                  variant="outlined"
+                  {...register("blog", {
+                    required: true,
+                  })}
+                  type="text"
+                  defaultValue={blogsData.blog}
+                  multiline
+                  rows={6}
+                  endAdornment={
+                    <InputAdornment position="end"></InputAdornment>
+                  }
+                />
+                {errors.email?.type === "required" && (
+                  <p className="text-red-600">Blog Content is required</p>
+                )}
+              </FormControl>
+
+              <Button
+                component="label"
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload file
+                <VisuallyHiddenInput
+                  {...register("image", {
+                    required: true,
+                  })}
+                  type="file"
+                />
+              </Button>
+
+              <FormControl
+                sx={{ m: 1, width: "75%", mb: 4 }}
+                variant="standard"
+              >
+                <Button
+                  sx={{ borderColor: "#FF2400", color: "#235870" }}
+                  type="submit"
+                  variant="outlined"
+                >
+                  <Typography fontWeight="fontWeightBold">
+                    Add Donation Request
+                  </Typography>
+                </Button>
+              </FormControl>
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default EditBlogs;
