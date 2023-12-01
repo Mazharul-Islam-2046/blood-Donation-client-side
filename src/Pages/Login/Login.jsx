@@ -11,6 +11,8 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
+import { Helmet } from "react-helmet";
+
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -68,7 +70,12 @@ const Login = () => {
   };
 
   return (
+    
     <div className="flex justify-center items-center h-[70vh]">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Login</title>
+      </Helmet>
       <div className="flex flex-col bg-slate-300 w-2/6 py-6 px-4 justify-center items-center rounded-md">
         <h1 className="text-4xl mb-8 font-semibold">Login</h1>
         <form

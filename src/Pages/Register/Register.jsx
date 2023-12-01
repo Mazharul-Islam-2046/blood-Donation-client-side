@@ -11,6 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
+
+import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -122,6 +124,10 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center h-auto min-h-screen">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Register</title>
+      </Helmet>
       <div className="flex flex-col bg-slate-300 w-3/5 py-6 px-4 justify-center items-center rounded-md">
         <h1 className="text-4xl mb-8 font-semibold">Register</h1>
         <form

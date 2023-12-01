@@ -3,12 +3,18 @@ import { Link, useLoaderData } from "react-router-dom";
 import Navbar from "../Shared/Navbar";
 import Footer from "../Shared/Footer/Footer";
 
+import { Helmet } from "react-helmet";
+
 
 const Blogs = () => {
     const blogs = useLoaderData()
     const publishedBlogs = blogs.filter((blog)=> blog.status === "publish")
     return (
         <div>
+          <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Blogs</title>
+      </Helmet>
             <Navbar/>
             <div className="bg-gray-600 py-24">
             <h1 className='text-4xl font-bold text-center mb-16 text-white'>All Blogs</h1>

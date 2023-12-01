@@ -17,6 +17,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { NavLink, Outlet } from "react-router-dom";
+
+import { Helmet } from "react-helmet";
 import {
   AccountCircle,
   AddCircle,
@@ -152,7 +154,13 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    
+    <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Dashboard</title>
+      </Helmet>
+      <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -251,5 +259,6 @@ export default function Dashboard() {
         <Outlet />
       </Box>
     </Box>
+    </div>
   );
 }

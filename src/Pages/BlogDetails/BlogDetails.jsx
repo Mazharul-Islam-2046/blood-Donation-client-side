@@ -3,11 +3,17 @@ import Navbar from '../Shared/Navbar';
 import Footer from '../Shared/Footer/Footer';
 import { useLoaderData } from 'react-router-dom';
 
+import { Helmet } from "react-helmet";
+
 const BlogDetails = () => {
     const blogsDetail = useLoaderData()
     console.log(blogsDetail);
     return (
         <div>
+            <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Blogs Details</title>
+      </Helmet>
             <Navbar/>
             <div className='pb-16 px-20'>
                 <h2 className='mb-16 mt-8 text-5xl font-bold text-center'>Blog In Details</h2>

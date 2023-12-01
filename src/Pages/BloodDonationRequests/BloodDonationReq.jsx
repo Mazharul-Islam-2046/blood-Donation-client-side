@@ -9,11 +9,17 @@ import TopBar from "../Home/TopBar/TopBar";
 import Navbar from "../Shared/Navbar";
 import Footer from "../Shared/Footer/Footer";
 
+import { Helmet } from "react-helmet";
+
 const BloodDonationReq = () => {
   const allDonationReqs = useLoaderData();
   console.log(allDonationReqs);
   return (
     <>
+    <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Donation Request</title>
+      </Helmet>
       <TopBar />
       <Navbar />
 

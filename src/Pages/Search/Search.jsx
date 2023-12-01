@@ -2,11 +2,17 @@ import { useContext } from "react";
 import SearchTopBar from "./SearchTopBar";
 import { AuthContext } from "../../Providers/AuthProvider";
 
+import { Helmet } from "react-helmet";
+
 
 const Search = () => {
     const {searchedUsers} = useContext(AuthContext)
     return (
         <div>
+          <Helmet>
+        <meta charSet="utf-8" />
+        <title>Blood Donation || Search</title>
+      </Helmet>
             <SearchTopBar/>
             <div className="grid grid-cols-3 gap-4 w-full mt-10 px-16 mb-16">
                 {
