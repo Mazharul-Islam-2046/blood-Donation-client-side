@@ -371,7 +371,7 @@ const Register = () => {
           </div>
 
 
-          <p className="text-center">
+          <p className="text-center col-span-2">
             Already Have an account? <Link to="/login">Login</Link>
           </p>
 
