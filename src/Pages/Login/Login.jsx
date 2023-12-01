@@ -123,7 +123,7 @@ const Login = () => {
                                 {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
           </FormControl>
 
-          <p className="mb-6">All Ready Have an Account? <Link to="/register" className="underline">Register</Link></p>
+          <p className="mb-6">Do Not Have an Account? <Link to="/register" className="underline">Register</Link></p>
 
           <FormControl sx={{ m: 1, width: "40ch", mb: 4 }} variant="standard">
             <Button

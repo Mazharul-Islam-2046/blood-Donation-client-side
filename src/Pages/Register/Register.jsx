@@ -18,6 +18,7 @@ import { useContext, useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -368,6 +369,11 @@ const Register = () => {
                 })} type="file" />
             </Button>
           </div>
+
+
+          <p className="text-center">
+            Already Have an account? <Link to="/login">Login</Link>
+          </p>
 
           <div className="col-span-2 flex justify-center">
             <FormControl sx={{ m: 1, width: "75%", mb: 4 }} variant="standard">
