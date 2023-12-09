@@ -1,8 +1,23 @@
-# React + Vite
+# Blood Donation App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Link](https://blood-donation-client-e03ab.web.app/)
 
-Currently, two official plugins are available:
+</br>
+<p>It's an web app for people who needs blood and who wants to donate blood</p>
+</br>
+</br>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+
+## 🎆Features of This Web App
+</br>
+
+<ul>
+  <li>This app has 3 dashboard one for admin, one for volunteer, and another for normal Donor</li>
+  <li>Every Role has their own work For Example, Use can't see the admin Panel or Volunteer</li>
+  <li>Admin can Delete a user</li>
+  <li>Admin Can make a donor into Volunteer</li>
+  <li>Admin can post Blogs</li>
+  <li>Volunteer Can Manage Donation Requests</li>
+</ul>
