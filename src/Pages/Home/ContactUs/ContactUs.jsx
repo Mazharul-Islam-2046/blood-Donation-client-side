@@ -1,29 +1,24 @@
-import { FaLocationDot } from "react-icons/fa6";
-import { IoMail } from "react-icons/io5";
+
+
 const ContactUs = () => {
-  return (
-    <div className="h-[100vh] md:h-[50vw] max-h-[550px] bg-[url('https://c.files.bbci.co.uk/182FF/production/_107317099_blooddonor976.jpg')] bg-cover relative">
-      <div className="h-full w-full bg-black opacity-50"></div>
-      <div className="absolute text-white top-0 w-full h-full flex justify-center items-center">
-        <div className="w-5/6 md:w-4/5 md:h-3/5 border-8 border-red-500 text-center py-8 md:py-16">
-          <p className="text-2xl font-semibold">Donate Now</p>
-          <p className="mt-6 mb-4 text-3xl md:text-5xl font-bold">
-            Call Now:- +011 3455 3455 34
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-6">
-            <div className="flex justify-center items-center gap-3 text-lg">
-              <FaLocationDot />
-              <p>1410, Bandar, Narayanganj</p>
-            </div>
-            <div className="flex justify-center items-center gap-3 text-lg">
-              <IoMail />
-              <p>blood@Donation.com</p>
-            </div>
-          </div>
+ 
+
+    return (
+        <div id="contactme" className="flex flex-col py-8 items-center border-2 rounded-md border-gray-900">
+            <h2 className="text-3xl md:text-4xl text-orange-400 font-secondary font-bold mt-8 uppercase">Contact Me</h2>
+            <form
+                className="flex flex-col w-[70vw] max-w-4xl md:w-[50vw] text-lg md:text-2xl px-2  md:px-28 py-20 font-primary"
+                action="https://formspree.io/f/xwkdgynp"
+                method="POST"
+            >
+                
+                    <input className="pt-2 pb-3 px-4 mb-14 outline-none border-b-2 border-gray-700"type="email" name="email" placeholder="Email"/>
+                    <textarea className="pt-3 px-4 mb-14 outline-none border-b-2 border-gray-700" name="message" placeholder="Message"></textarea>
+                
+                <button className="bg-orange-300 rounded-md text-white py-3 hover:text-gray-800 hover:bg-white border-gray-800 hover:border-2" type="submit">Send</button>
+            </form>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ContactUs;

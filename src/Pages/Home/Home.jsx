@@ -5,7 +5,7 @@ import Navbar from "../Shared/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import HeroSection from "./HeroSection/HeroSection";
 import FeaturedBlogs from "./FeaturedBlogSection/FeaturedBlogs";
-import ContactUs from "./ContactUs/ContactUs";
+import Contact from "./ContactUs/Contact";
 
 const Home = () => {
   return (
@@ -18,7 +18,7 @@ const Home = () => {
       <Navbar/>
       <HeroSection/>
       <FeaturedBlogs/>
-      <ContactUs/>
+      <Contact/>
       <Footer/>
     </div>
   );
